@@ -1190,3 +1190,14 @@ footer {
     padding-top: 100px; 
   }
 }
+
+/* Team Card Image Fix */
+.about-hero-grid ~ section img,
+#about-view .container img[alt="Principal Broker"],
+#about-view .container img[alt="Head of Sales"],
+#about-view .container img[alt="Investment Advisor"] {
+  height: 280px !important;
+  width: 100% !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+}
