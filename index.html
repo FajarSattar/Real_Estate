@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capital Homes — Islamabad Real Estate & AI Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION (GLOBAL) -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color: #34D399;"></i>
+    <span id="toast-text">Action successful!</span>
+  </div>
+
+  <!-- ===================== GLOBAL NAVBAR (HAR PAGE KE LIYE) ===================== -->
+  <div class="nav-wrapper">
+    <nav class="navbar">
+      <div class="logo" onclick="navigateTo('home-view')">
+        <div class="logo-icon"><i class="fa-solid fa-building-user"></i></div>
+        <div class="logo-text">
+          <span class="l1">Capital Homes</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a onclick="navigateTo('home-view')" class="nav-item active" data-view="home-view">Home</a></li>
+        <li><a onclick="navigateTo('properties-view')" class="nav-item" data-view="properties-view">Properties</a></li>
+        <li><a onclick="navigateTo('about-view')" class="nav-item" data-view="about-view">About</a></li>
+        <li><a onclick="navigateTo('contact-view')" class="nav-item" data-view="contact-view">Contact</a></li>
+      </ul>
+      <a onclick="navigateTo('contact-view')" class="nav-cta">Get in Touch</a>
+      <button class="nav-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a onclick="closeMobileMenu(); navigateTo('home-view')">Home</a></li>
+      <li><a onclick="closeMobileMenu(); navigateTo('properties-view')">Properties</a></li>
+      <li><a onclick="closeMobileMenu(); navigateTo('about-view')">About</a></li>
+      <li><a onclick="closeMobileMenu(); navigateTo('contact-view')">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 1. HOME VIEW                                                              -->
+  <!-- ========================================================================= -->
+  <div id="home-view" class="page-view active-view">
+    <div class="top-bg-wrapper">
+      <section class="hero-section">
+        <div class="hero-panel">
+          <div class="hero-photo">
+            <img src="assets/1.jpg" onerror="this.src='https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'" alt="Modern house exterior in DHA Islamabad">
+          </div>
+          <div class="hero-blob">
+            <h1>Modern <span class="thin">Home</span><br>For Sale</h1>
+            <p>5 bed, 6 marla corner house in DHA Phase 2 with rooftop terrace and covered parking. Ready to move in.</p>
+            <a onclick="openPropertyDetail(1)" class="btn">View Property</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- SMART SEARCH BAR -->
+    <div class="search-wrapper">
+      <form class="smart-search-bar" onsubmit="handleHeroSearch(event)">
+        <div class="search-item">
+          <label><i class="fa-solid fa-location-dot"></i> Location</label>
+          <select id="heroLocation">
+            <option value="all">All Locations, Islamabad</option>
+            <option value="DHA Phase 2, Islamabad">DHA Phase 2, Islamabad</option>
+            <option value="Sector F-7/2, Islamabad">Sector F-7/2, Islamabad</option>
+            <option value="Bahria Town Phase 8, Islamabad">Bahria Town Phase 8</option>
+          </select>
+        </div>
+        <div class="search-item">
+          <label><i class="fa-solid fa-tag"></i> Budget</label>
+          <select id="heroBudget">
+            <option value="all">Any Budget</option>
+            <option value="under-5">Under 5 Crore</option>
+            <option value="5-10">5 - 10 Crore</option>
+            <option value="above-10">10+ Crore / Luxury</option>
+          </select>
+        </div>
+        <div class="search-item">
+          <label><i class="fa-solid fa-bed"></i> Bedrooms</label>
+          <select id="heroBeds">
+            <option value="all">Any Beds</option>
+            <option value="3">3 Bedrooms</option>
+            <option value="4">4 Bedrooms</option>
+            <option value="5">5+ Bedrooms</option>
+          </select>
+        </div>
+        <div class="search-item">
+          <label><i class="fa-solid fa-house"></i> Type</label>
+          <select id="heroType">
+            <option value="all">All Types</option>
+            <option value="Villa">Luxury Villa</option>
+            <option value="House">Modern House</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="height: 46px;">
+          <i class="fa-solid fa-magnifying-glass"></i> Search
+        </button>
+      </form>
+    </div>
+
+    <!-- PROPERTY HIGHLIGHTS SECTION -->
+    <section class="highlights-section">
+      <div class="highlights-heading">
+        <span class="eyebrow">Property Highlights</span>
+        <h2>Why This Home Stands Out</h2>
+      </div>
+      <div class="feature-strip">
+        <div class="feature-strip-inner">
+          <div class="photo-box left">
+            <img src="assets/2.jpg" onerror="this.src='https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=600&q=80'" alt="Modern living room with wooden accent wall">
+          </div>
+          <div class="features-box">
+            <h3>Home Features</h3>
+            <ul class="features-list">
+              <li><i class="fa-solid fa-bed"></i> 5 Bedrooms</li>
+              <li><i class="fa-solid fa-water-ladder"></i> Swimming Pool</li>
+              <li><i class="fa-solid fa-couch"></i> Living Rooms</li>
+              <li><i class="fa-solid fa-car"></i> Covered Parking</li>
+              <li><i class="fa-solid fa-kitchen-set"></i> Kitchen + Store</li>
+              <li><i class="fa-solid fa-door-open"></i> Guest Room</li>
+            </ul>
+          </div>
+          <div class="photo-box right">
+            <img src="assets/3-2.jpg" onerror="this.src='https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=600&q=80'" alt="Luxury living room with marble accent wall">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK STATS BAR -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>500+</h3>
+            <p>Verified Properties</p>
+          </div>
+          <div class="stat-card">
+            <h3>10+</h3>
+            <p>Years Experience</p>
+          </div>
+          <div class="stat-card">
+            <h3>98%</h3>
+            <p>Client Satisfaction</p>
+          </div>
+          <div class="stat-card">
+            <h3>PKR 2B+</h3>
+            <p>Real Estate Transacted</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROPERTIES -->
+    <section class="section-padding">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+          <div>
+            <span class="eyebrow"><i class="fa-solid fa-star"></i> Handpicked Selection</span>
+            <h2 class="section-title">Featured Properties</h2>
+            <p class="section-subtitle" style="margin-bottom: 0;">Explore exclusive premium listings across Islamabad.</p>
+          </div>
+          <button class="btn btn-outline" onclick="navigateTo('properties-view')">
+            View All Properties <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="property-grid" id="featuredGrid">
+          <!-- Populated dynamically by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section class="section-padding" style="background: var(--color-bg-secondary);">
+      <div class="container">
+        <div style="text-align: center; max-width: 650px; margin: 0 auto 40px;">
+          <span class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Why Capital Homes</span>
+          <h2 class="section-title">The Modern Standard In Real Estate</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">Combining state-of-the-art AI technology with elite personal broker expertise.</p>
+        </div>
+
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-robot"></i></div>
+            <h4>AI-Powered Search</h4>
+            <p>Natural conversational search matches your lifestyle, commute, and budget with precision.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h4>100% Verified Listings</h4>
+            <p>Every registry, legal document, and CDA/LDA approval is physically inspected.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-user-tie"></i></div>
+            <h4>Trusted Elite Agents</h4>
+            <p>Our licensed brokers negotiate top-dollar savings with confidentiality and bespoke care.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon"><i class="fa-solid fa-bolt"></i></div>
+            <h4>Fast Response</h4>
+            <p>Instant virtual tours and site visits scheduled within 2 hours of inquiry.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section-padding">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+          <span class="eyebrow"><i class="fa-solid fa-list-check"></i> Simple 3-Step Process</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">Finding your dream home or investment has never been smoother.</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <span class="step-num">01</span>
+            <div class="why-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h4>1. Search & Filter</h4>
+            <p>Browse curated listings across DHA, F-7, and Bahria Town with instant smart filters.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">02</span>
+            <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
+            <h4>2. Chat with AI or Agent</h4>
+            <p>Get instant answers regarding property legalities, ROI projections, and video walk-throughs.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">03</span>
+            <div class="why-icon"><i class="fa-solid fa-key"></i></div>
+            <h4>3. Schedule Visit & Close</h4>
+            <p>Enjoy a private chauffeured site visit and seamless paperwork completion with our legal desk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR LOCATIONS -->
+    <section class="section-padding" style="background: var(--color-bg-secondary);">
+      <div class="container">
+        <div style="text-align: center; max-width: 650px; margin: 0 auto 40px;">
+          <span class="eyebrow"><i class="fa-solid fa-earth-americas"></i> Prime Hotspots</span>
+          <h2 class="section-title">Explore High-Demand Areas</h2>
+          <p class="section-subtitle" style="margin: 0 auto;">Top performing residential and investment sectors in Islamabad.</p>
+        </div>
+
+        <div class="location-grid">
+          <div class="location-card" onclick="filterByLocation('DHA Phase 2, Islamabad')">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80" alt="DHA Islamabad">
+            <div class="location-overlay">
+              <h4>DHA Islamabad</h4>
+              <span>120+ Available Properties</span>
+            </div>
+          </div>
+          <div class="location-card" onclick="filterByLocation('Sector F-7/2, Islamabad')">
+            <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=600&q=80" alt="Sector F-7">
+            <div class="location-overlay">
+              <h4>Sector F-7 & Margalla</h4>
+              <span>45+ Luxury Mansions</span>
+            </div>
+          </div>
+          <div class="location-card" onclick="filterByLocation('Bahria Town Phase 8, Islamabad')">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=600&q=80" alt="Bahria Town">
+            <div class="location-overlay">
+              <h4>Bahria Town Phase 8</h4>
+              <span>85+ Contemporary Homes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section-padding">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+          <span class="eyebrow"><i class="fa-solid fa-quote-left"></i> Verified Reviews</span>
+          <h2 class="section-title">What Our Clients Say</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p class="testimonial-text">"Capital Homes found us our dream 1 Kanal corner villa in DHA 2 in 4 days. The AI chat answered our legal queries instantly, and the closing was 100% transparent."</p>
+            <div class="client-info">
+              <div class="client-avatar"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Dr. Sarah Tariq"></div>
+              <div>
+                <div class="client-name">Dr. Sarah Tariq</div>
+                <div class="client-role">Homeowner, DHA Islamabad</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p class="testimonial-text">"As an overseas Pakistani living in London, trust is paramount. Capital Homes handled my investment in F-7 with supreme professionalism and verified documentation."</p>
+            <div class="client-info">
+              <div class="client-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Hamza Malik"></div>
+              <div>
+                <div class="client-name">Hamza Malik</div>
+                <div class="client-role">Overseas Investor, UK</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <p class="testimonial-text">"Their in-depth market analysis and negotiation support made moving from shortlisting to possession keys effortless."</p>
+            <div class="client-info">
+              <div class="client-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Tariq Mansoor"></div>
+              <div>
+                <div class="client-name">Tariq Mansoor</div>
+                <div class="client-role">Tech Entrepreneur</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI CHATBOT PREVIEW / CTA BANNER -->
+        <div class="ai-cta-banner" style="margin-top: 50px;">
+          <div class="ai-cta-content">
+            <span class="eyebrow" style="background: rgba(255,255,255,0.15); color: #fff;"><i class="fa-solid fa-sparkles"></i> 24/7 AI Property Concierge</span>
+            <h3>Not sure what you're looking for?</h3>
+            <p>Ask our custom AI assistant anything: "Show me 4 bed houses in DHA under 6 Crore" or "Compare rental yields in F-7 vs Bahria Town Phase 8".</p>
+          </div>
+          <button class="btn" style="background: #FFFFFF; color: var(--color-primary); font-weight: 700; white-space: nowrap;" onclick="toggleChat(true)">
+            <i class="fa-solid fa-comments"></i> Launch AI Assistant
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. PROPERTIES (LISTING) VIEW                                              -->
+  <!-- ========================================================================= -->
+  <div id="properties-view" class="page-view">
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumb"><a onclick="navigateTo('home-view')">Home</a> / <span>Properties</span></div>
+        <h1 class="section-title" style="color: #FFFFFF;">Explore Properties</h1>
+        <p style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto;">Discover the finest curated residential listings in Islamabad.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="filter-bar">
+        <div class="filter-item">
+          <label>Location</label>
+          <select id="filterLocation" onchange="applyFilters()">
+            <option value="all">All Locations</option>
+            <option value="DHA Phase 2, Islamabad">DHA Phase 2</option>
+            <option value="Sector F-7/2, Islamabad">Sector F-7/2</option>
+            <option value="Bahria Town Phase 8, Islamabad">Bahria Town Phase 8</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Type</label>
+          <select id="filterType" onchange="applyFilters()">
+            <option value="all">All Types</option>
+            <option value="Villa">Villa</option>
+            <option value="House">House</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Bedrooms</label>
+          <select id="filterBeds" onchange="applyFilters()">
+            <option value="all">Any Beds</option>
+            <option value="3">3 Beds</option>
+            <option value="4">4 Beds</option>
+            <option value="5">5+ Beds</option>
+          </select>
+        </div>
+        <div class="filter-item">
+          <label>Max Price</label>
+          <select id="filterPrice" onchange="applyFilters()">
+            <option value="all">Any Price</option>
+            <option value="60000000">Up to PKR 6.0 Crore</option>
+            <option value="100000000">Up to PKR 10.0 Crore</option>
+            <option value="200000000">Up to PKR 20.0 Crore</option>
+          </select>
+        </div>
+        <div style="display: flex; align-items: flex-end;">
+          <button class="btn btn-outline" style="padding: 9px 18px;" onclick="resetFilters()">
+            <i class="fa-solid fa-rotate-left"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="section-padding" style="padding-top: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <span id="resultsCount" style="font-weight: 600; color: var(--color-text-muted);">Showing 5 Properties</span>
+        </div>
+        <div class="property-grid" id="allPropertiesGrid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 3. PROPERTY DETAIL VIEW                                                   -->
+  <!-- ========================================================================= -->
+  <div id="property-detail-view" class="page-view">
+    <div class="container section-padding" style="padding-top: 110px;">
+      <button class="btn btn-outline" style="margin-bottom: 20px;" onclick="navigateTo('properties-view')">
+        <i class="fa-solid fa-arrow-left"></i> Back to Properties
+      </button>
+
+      <div id="detailContainer">
+        <!-- Rendered dynamically by openPropertyDetail(id) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 4. ABOUT VIEW                                                             -->
+  <!-- ========================================================================= -->
+  <div id="about-view" class="page-view">
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumb"><a onclick="navigateTo('home-view')">Home</a> / <span>About Us</span></div>
+        <h1 class="section-title" style="color: #FFFFFF;">About Capital Homes</h1>
+        <p style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto;">Pioneering transparency and next-generation intelligence in Islamabad real estate advisory.</p>
+      </div>
+    </div>
+
+    <section class="section-padding">
+      <div class="container">
+        <div class="about-hero-grid">
+          <div>
+            <span class="eyebrow"><i class="fa-solid fa-building"></i> Our Story</span>
+            <h2 class="section-title">Redefining Real Estate In Islamabad</h2>
+            <p style="color: var(--color-text-muted); margin-bottom: 16px;">Founded over a decade ago in Islamabad, Capital Homes has grown into a trusted boutique brokerage. We recognized that buying or selling a home was plagued by misinformation, undocumented deals, and delayed searches.</p>
+            <p style="color: var(--color-text-muted); margin-bottom: 24px;">By integrating artificial intelligence with on-the-ground legal verification, we ensure each client receives institutional-grade representation with zero hassle.</p>
+            <div style="display: flex; gap: 24px;">
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 28px; color: var(--color-accent);">1,200+</h3>
+                <p style="font-size: 13px; color: var(--color-text-muted);">Transactions Closed</p>
+              </div>
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 28px; color: var(--color-accent);">15+</h3>
+                <p style="font-size: 13px; color: var(--color-text-muted);">Industry Awards</p>
+              </div>
+              <div>
+                <h3 style="font-family: var(--font-display); font-size: 28px; color: var(--color-accent);">100%</h3>
+                <p style="font-size: 13px; color: var(--color-text-muted);">Legal Title Guarantee</p>
+              </div>
+            </div>
+          </div>
+          <div class="about-img-frame">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="Capital Homes Corporate Headquarters">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENTS SECTION -->
+    <section class="section-padding" style="background: var(--color-bg-secondary);">
+      <div class="container">
+        <div style="text-align: center; max-width: 600px; margin: 0 auto 40px;">
+          <span class="eyebrow"><i class="fa-solid fa-user-shield"></i> Leadership</span>
+          <h2 class="section-title">Meet Our Managing Brokers</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;">
+          <div style="background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--color-border); text-align: center; padding-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" style="height: 260px; width: 100%;" alt="Principal Broker">
+            <h4 style="font-family: var(--font-display); font-size: 18px; margin-top: 18px; color: var(--color-primary);">Zayn Chaudhry</h4>
+            <p style="font-size: 13px; color: var(--color-accent); font-weight: 600;">Managing Director & Founder</p>
+            <p style="font-size: 12px; color: var(--color-text-muted); padding: 0 16px; margin-top: 8px;">15+ years experience in Islamabad real estate portfolio management.</p>
+          </div>
+          <div style="background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--color-border); text-align: center; padding-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" style="height: 260px; width: 100%;" alt="Head of Sales">
+            <h4 style="font-family: var(--font-display); font-size: 18px; margin-top: 18px; color: var(--color-primary);">Amina Sherazi</h4>
+            <p style="font-size: 13px; color: var(--color-accent); font-weight: 600;">Head of Luxury Sales (Islamabad)</p>
+            <p style="font-size: 12px; color: var(--color-text-muted); padding: 0 16px; margin-top: 8px;">Specialist in Sector F-6, F-7, and DHA Diplomatic Enclave housing.</p>
+          </div>
+          <div style="background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid var(--color-border); text-align: center; padding-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" style="height: 260px; width: 100%;" alt="Investment Advisor">
+            <h4 style="font-family: var(--font-display); font-size: 18px; margin-top: 18px; color: var(--color-primary);">Bilal Nasir</h4>
+            <p style="font-size: 13px; color: var(--color-accent); font-weight: 600;">Director — Investment Advisory</p>
+            <p style="font-size: 12px; color: var(--color-text-muted); padding: 0 16px; margin-top: 8px;">Guiding high net worth investors into Bahria Town and emerging Islamabad sectors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- READY TO FIND PROPERTY CTA -->
+    <section class="container section-padding">
+      <div class="ai-cta-banner" style="background: var(--color-accent); text-align: center; justify-content: center; flex-direction: column;">
+        <h3 style="font-size: 30px;">Ready To Find Your Dream Property?</h3>
+        <p style="max-width: 580px; margin: 10px auto 20px;">Get in touch with one of our certified senior consultants or try out our 24/7 AI matching concierge.</p>
+        <button class="btn btn-dark" onclick="navigateTo('contact-view')">
+          Contact Our Advisory Team <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 5. CONTACT VIEW                                                           -->
+  <!-- ========================================================================= -->
+  <div id="contact-view" class="page-view">
+    <div class="page-header">
+      <div class="container">
+        <div class="breadcrumb"><a onclick="navigateTo('home-view')">Home</a> / <span>Contact Us</span></div>
+        <h1 class="section-title" style="color: #FFFFFF;">Get In Touch</h1>
+        <p style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto;">Have a question about a listing or want to schedule a private viewing? We're here 24/7.</p>
+      </div>
+    </div>
+
+    <section class="section-padding">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- FORM -->
+          <div style="background: #fff; border: 1px solid var(--color-border); border-radius: 24px; padding: 34px; box-shadow: var(--shadow-sm);">
+            <h3 style="font-family: var(--font-display); font-size: 24px; margin-bottom: 8px; color: var(--color-primary);">Send Us A Message</h3>
+            <p style="font-size: 13.5px; color: var(--color-text-muted); margin-bottom: 24px;">Our advisors reply in under 15 minutes during business hours.</p>
+
+            <form onsubmit="handleContactSubmit(event)">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" required placeholder="e.g. Asad Farooq">
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label>Email Address *</label>
+                  <input type="email" required placeholder="asad@example.com">
+                </div>
+                <div class="form-group">
+                  <label>Phone / WhatsApp *</label>
+                  <input type="tel" required placeholder="+92 300 1234567">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Interested In</label>
+                <select>
+                  <option>Buying a Property</option>
+                  <option>Selling / Listing My Property</option>
+                  <option>Schedule a Site Visit</option>
+                  <option>General Inquiry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Your Message</label>
+                <textarea rows="4" placeholder="Tell us about your preferred location, budget, or specific requirements..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%; height: 46px;">
+                <i class="fa-solid fa-paper-plane"></i> Send Inquiry
+              </button>
+            </form>
+          </div>
+
+          <!-- DIRECT INFO & MAP -->
+          <div>
+            <div style="background: var(--color-bg-secondary); border-radius: 24px; padding: 30px; border: 1px solid var(--color-border); margin-bottom: 20px;">
+              <h4 style="font-family: var(--font-display); font-size: 20px; margin-bottom: 18px; color: var(--color-primary);">Direct Contact</h4>
+              <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px;">
+                <li style="display: flex; gap: 14px; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent-light); color: var(--color-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="fa-solid fa-phone"></i>
+                  </div>
+                  <div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Phone & Helpline</div>
+                    <div style="font-size: 14px; font-weight: 600; color: var(--color-primary);">+92 (51) 000-0000 / +92 300 0000000</div>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 14px; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent-light); color: var(--color-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
+                  <div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Official Inquiries</div>
+                    <div style="font-size: 14px; font-weight: 600; color: var(--color-primary);">advisory@capitalhomes.pk</div>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 14px; align-items: center;">
+                  <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-accent-light); color: var(--color-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div>
+                    <div style="font-size: 12px; color: var(--color-text-muted);">Main Islamabad Office</div>
+                    <div style="font-size: 14px; font-weight: 600; color: var(--color-primary);">Executive Heights, Sector F-7 Markaz, Islamabad, Pakistan</div>
+                  </div>
+                </li>
+              </ul>
+
+              <a href="" target="_blank" class="btn" style="background: #25D366; color: #fff; width: 100%; margin-top: 20px;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> Chat on WhatsApp Instantly
+              </a>
+            </div>
+
+            <!-- EMBEDDED MAP -->
+            <div class="map-container">
+              <iframe
+                title="Office Location Map"
+                src="https://maps.google.com/maps?q=F-7%20Markaz%20Islamabad&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="100%"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- GLOBAL FOOTER (ALL VIEWS)                                                 -->
+  <!-- ========================================================================= -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-building-user"></i></div>
+            <div class="logo-text"><span class="l1" style="font-size: 18px;">Capital Homes</span></div>
+          </div>
+          <p style="font-size: 13.5px; margin-top: 14px; color: rgba(255,255,255,0.7); max-width: 320px;">Islamabad's premier real estate consultancy. Delivering transparency, AI-assisted search, and high-yielding property opportunities.</p>
+          <div class="social-icons">
+            <a href="#" class="social-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li><a onclick="navigateTo('home-view')">Home</a></li>
+            <li><a onclick="navigateTo('properties-view')">All Properties</a></li>
+            <li><a onclick="navigateTo('about-view')">About Agency</a></li>
+            <li><a onclick="navigateTo('contact-view')">Contact & Office</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Prime Sectors</h5>
+          <ul>
+            <li><a onclick="filterByLocation('DHA Phase 2, Islamabad')">DHA Phase 2 Islamabad</a></li>
+            <li><a onclick="filterByLocation('Sector F-7/2, Islamabad')">Sector F-7 / Margalla</a></li>
+            <li><a onclick="filterByLocation('Bahria Town Phase 8, Islamabad')">Bahria Town Phase 8</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Headquarters</h5>
+          <ul class="contact-list">
+            <li><i class="fa-solid fa-location-dot"></i> F-7 Markaz, Islamabad</li>
+            <li><i class="fa-solid fa-phone"></i> +92 (51) 289-4500</li>
+            <li><i class="fa-solid fa-envelope"></i> advisory@capitalhomes.pk</li>
+            <li><i class="fa-solid fa-clock"></i> Mon - Sat: 9:00 AM - 7:00 PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 Capital Homes. All rights reserved. Registered CDA & Real Estate Regulatory Authority.</div>
+        <div style="display:flex; gap: 16px;">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- GLOBAL FLOATING TOOLS (AI CHATBOT & WHATSAPP)                             -->
+  <!-- ========================================================================= -->
+  <div class="floating-tools">
+    <a href="#" target="_blank" class="whatsapp-float" title="Direct WhatsApp Chat" aria-label="WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+    <button class="ai-chat-btn" id="aiChatBtn" onclick="toggleChat()" title="Open AI Real Estate Assistant" aria-label="Open AI Chatbot">
+      <i class="fa-solid fa-robot"></i>
+      <span class="pulse-dot"></span>
+    </button>
+  </div>
+
+  <!-- INTERACTIVE AI CHATBOT WIDGET -->
+  <div class="ai-chat-widget" id="aiChatWidget">
+    <div class="chat-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="logo-icon" style="width:30px; height:30px; font-size:13px;"><i class="fa-solid fa-robot"></i></div>
+        <div>
+          <h4>Capital AI Assistant</h4>
+          <span><i class="fa-solid fa-circle" style="font-size:7px;"></i> Online • Islamabad</span>
+        </div>
+      </div>
+      <button class="chat-close-btn" onclick="toggleChat(false)"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">
+        Hello! I'm your Capital Homes AI advisor. How can I help you find your dream property in Islamabad today?
+      </div>
+    </div>
+
+    <div class="quick-prompts">
+      <span class="prompt-pill" onclick="sendQuickPrompt('Show me DHA Islamabad villas')">DHA Islamabad</span>
+      <span class="prompt-pill" onclick="sendQuickPrompt('Properties under 5 Crore')">Under 5 Crore</span>
+      <span class="prompt-pill" onclick="sendQuickPrompt('How to schedule a site visit?')">Schedule Visit</span>
+      <span class="prompt-pill" onclick="sendQuickPrompt('Show Bahria Town villas')">Bahria Town</span>
+    </div>
+
+    <form class="chat-input-area" onsubmit="handleChatSubmit(event)">
+      <input type="text" id="chatInput" placeholder="Ask AI: e.g. 4 bed house in F-7..." autocomplete="off">
+      <button type="submit" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
