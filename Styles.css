@@ -120,7 +120,7 @@ img { max-width: 100%; display: block; object-fit: cover; }
   position: relative;
   padding-top: 50px;
   padding-bottom: 40px;
-  background: url('assets/4.jpg') center 30%/cover no-repeat, #0F1B3D;
+  background: url('4.jpg') center 30%/cover no-repeat, #0F1B3D;
 }
 
 .top-bg-wrapper::before {
