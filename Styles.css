@@ -116,18 +116,32 @@ img { max-width: 100%; display: block; object-fit: cover; }
 /* ========================================================================= */
 /* 03. TOP BACKGROUND WRAPPER (HOME HERO ONLY)                               */
 /* ========================================================================= */
+/* ========================================================================= */
+/* 03. TOP BACKGROUND WRAPPER (HOME HERO ONLY)                               */
+/* ========================================================================= */
 .top-bg-wrapper {
   position: relative;
   padding-top: 50px;
   padding-bottom: 40px;
-  background: url('./4.jpg') center 30%/cover no-repeat, #0F1B3D;
+  background-color: #0F1B3D;
+  background-image: url('4.jpg');
+  background-position: center 30%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .top-bg-wrapper::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,27,61,0.75) 0%, rgba(15,27,61,0.88) 100%);
+  /* Light overlay taaki peeche ki 4.jpg image saaf nazar aaye */
+  background: linear-gradient(180deg, rgba(15, 27, 61, 0.45) 0%, rgba(15, 27, 61, 0.65) 100%);
+  z-index: 1;
+}
+
+.top-bg-wrapper .hero-section {
+  position: relative;
+  z-index: 2;
 }
 
 /* ========================================================================= */
